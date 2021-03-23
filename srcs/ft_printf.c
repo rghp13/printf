@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 02:32:40 by romain            #+#    #+#             */
-/*   Updated: 2021/03/16 18:44:13 by romain           ###   ########.fr       */
+/*   Updated: 2021/03/23 16:50:51 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-//You'll probably need a Struct that holds all the vars you'll be using
-//Expect to treat cspdiuxX%
+
 /*
 ** c = Char
 ** s = String
@@ -27,8 +26,19 @@
 ** 0 = left pad with 0s instead of spaces where padding is requested
 ** .*= precision is the previous argument.
 */
-int ft_printf(const char *format, ...)
+
+void	ft_read(t_container container)
+{
+	
+}
+
+int		ft_printf(const char *format, ...)
 {
 	t_container container;
 
+	container.format = format;
+	va_start(container.ap, container.format);
+	ft_read(container);
+	
+	return (container.retval);
 }

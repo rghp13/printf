@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf_util.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/09 02:34:37 by romain            #+#    #+#             */
-/*   Updated: 2021/03/24 18:03:51 by rponsonn         ###   ########.fr       */
+/*   Created: 2021/03/24 16:15:47 by rponsonn          #+#    #+#             */
+/*   Updated: 2021/03/24 18:03:49 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <stdlib.h>
-# include <stdarg.h>
-# include "libft.h"
-
-typedef struct		s_container
+int	ft_struct_init(t_container var)
 {
-	va_list			ap;
-	const char		*format;
-	int				retval;
-}					t_container;
-
-int		ft_printf(const char *format, ...);
-void	ft_read(t_container var);
-int		ft_flag_check(t_container var, int i);
-void	ft_print_arg(t_container var);
-
-#endif
+	;//set all flag values to 0, will be used to set and reset every new param that's pulled
+}

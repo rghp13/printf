@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:15:47 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/03/25 16:55:51 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/03/27 14:14:23 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ int		ft_flag_check(t_container *var, int i)
 	i += ft_parse_precision(var, i);
 	if (ft_is_valid_type(var->format[i], VALTYPE))
 	{
-		
+		;
 	}
 }

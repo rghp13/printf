@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 02:32:40 by romain            #+#    #+#             */
-/*   Updated: 2021/03/25 16:45:40 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/01 17:59:28 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 ** % = for when you want the % symbol to display
 ** - = left justify
 ** 0 = left pad with 0s instead of spaces where padding is requested
+**num= for digits it sets minimum amt of space.
+** . = precision, on floats it shows how far to go, on ints it shows the minimum amount of digits to write, for strings this is the maximum space you can take(will truncate)
 ** .*= precision is the previous argument.
 **main function initializes, second starts outputting chars, if
 */
@@ -45,8 +47,6 @@ void	ft_read(t_container *var)
 				ft_print_arg(var);
 				i += processed;
 			}
-			else
-				ft_print_char(var, i);
 		}
 		else
 			ft_print_char(var, i);

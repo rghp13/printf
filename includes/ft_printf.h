@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 02:34:37 by romain            #+#    #+#             */
-/*   Updated: 2021/03/25 16:54:37 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/02 12:28:47 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdarg.h>
 # include "libft.h"
 # define VALTYPE "cspdiuxX%"
+# define TRUE 1
+# define FALSE 0
 
 typedef struct		s_container
 {

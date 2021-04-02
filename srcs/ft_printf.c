@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 02:32:40 by romain            #+#    #+#             */
-/*   Updated: 2021/04/01 17:59:28 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/02 16:29:34 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_read(t_container *var)
 		processed = 0;
 		if (var->format[i] == '%' && var->format[i + 1] != '\0')
 		{
-			processed = ft_flag_check(var, i + 1);
+			processed = ft_flag_check(var, ++i);
 			if (processed)
 			{
 				ft_print_arg(var);

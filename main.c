@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 12:28:59 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/02 16:48:27 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/03 14:41:54 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ int	main(void)
 
 	a = 4;
 	number = 50;
-	printf("%08q...*..16642938724983.2{\n", a, number);
+	printf("%08...-5d\n", number);
 	return (0);
 }

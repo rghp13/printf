@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:15:47 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/03 18:07:10 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/05 21:59:00 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,15 @@ int		ft_flag_check(t_container *var, int i)
 
 int		ft_parse_type(t_container *var, int i, char *type) //TEST THIS FUNCTION TO MAKE SURE IT WORKS PROPERLY
 {
-	char	hold;
 	char	*ptr;
 	int		diff;
 
 	diff = i;
-	hold = var->format[i];
-	ptr = ft_strchr(type, var->format[i]);
+	while (ft_strchr(type, var->format[i]) == 0 && var->format[i] != '\0')
+		i++;
+	if (var->format[i])
+		var->type = var->format[i];
+	return (i - diff);
 }
 
 int		ft_parse_precision(t_container *var, int i)

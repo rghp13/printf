@@ -6,19 +6,21 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 12:28:59 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/03 14:41:54 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/06 15:53:51 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <unistd.h>
 
-int	main(void)
+int main()
 {
-	int number;
-	int a;
+	char hold[] = "abcdefghijk";
+	int i;
 
-	a = 4;
-	number = 50;
-	printf("%08...-5d\n", number);
-	return (0);
+	i = 0;
+	while (hold[i])
+	{
+		write(1, hold + i, 1);
+		i++;
+	}
 }

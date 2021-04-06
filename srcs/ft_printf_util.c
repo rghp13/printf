@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:15:47 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/05 21:59:00 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/06 15:02:31 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		ft_flag_check(t_container *var, int i)
 	return (i - diff);
 }
 
-int		ft_parse_type(t_container *var, int i, char *type) //TEST THIS FUNCTION TO MAKE SURE IT WORKS PROPERLY
+int		ft_parse_type(t_container *var, int i, char *type)
 {
 	char	*ptr;
 	int		diff;
@@ -90,7 +90,7 @@ int		ft_parse_flag(t_container *var, int i)
 			var->fwidth = va_arg(var->ap, int);
 		else if (hold > '0' && hold <= '9')
 		{
-			var->fwidth = ft_atoi(var->format[i]);
+			var->fwidth = ft_atoi(var->format + i);
 			while (ft_isdigit(var->format[i]))
 				i++;
 			i--;

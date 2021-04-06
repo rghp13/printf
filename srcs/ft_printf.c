@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 02:32:40 by romain            #+#    #+#             */
-/*   Updated: 2021/04/03 15:07:03 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/06 16:05:11 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,28 @@ void	ft_read(t_container *var)
 		if (var->format[i] == '%' && var->format[i + 1] != '\0')
 		{
 			processed = ft_flag_check(var, ++i);
-			if (processed)
+			if (processed && var->type)
 			{
 				ft_print_arg(var);
 				i += processed;
 			}
+			else
+				ft_print_char(var, i);
+			
 		}
 		else
 			ft_print_char(var, i);
 	}
+}
+void	ft_print_arg(t_container *var)
+{
+	//now you start the printing of the data you gathered.
+}
+
+void	ft_printf_char(t_container *var, int i)
+{
+	write(1, var->format + i, 1);
+	var->retval++;
 }
 
 int		ft_printf(const char *format, ...)

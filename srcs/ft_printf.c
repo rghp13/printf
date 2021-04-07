@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 02:32:40 by romain            #+#    #+#             */
-/*   Updated: 2021/04/06 16:05:11 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/07 16:36:35 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,37 @@ void	ft_read(t_container *var)
 			processed = ft_flag_check(var, ++i);
 			if (processed && var->type)
 			{
-				ft_print_arg(var);
+				if (ft_print_arg(var) < 0)
+					printf("Error, entered ft_print_arg with no type");
 				i += processed;
 			}
 			else
-				ft_print_char(var, i);
-			
+				ft_print_nonformat(var, i);
 		}
 		else
-			ft_print_char(var, i);
+			ft_print_nonformat(var, i);
 	}
 }
-void	ft_print_arg(t_container *var)
-{
-	//now you start the printing of the data you gathered.
-}
 
-void	ft_printf_char(t_container *var, int i)
+int		ft_print_arg(t_container *var)//c|s|p|di|u|xX|%
+{
+	if (var->type == 'c')
+		ft_print_char(var);
+	else if (var->type == 's')
+		ft_print_str(var);
+	else if (var->type == 'p')
+		ft_print_address(var);
+	else if (var->type == 'd' || var->type == 'i')
+		ft_print_int(var);
+	else if (var->type == 'u')
+		ft_print_uint(var);
+	else if (var->type == 'x' || var->type == 'X')
+		ft_print_hex(var);
+	else if (var->type == '%')
+		ft_print_percent(var);
+}
+	//now you start the printing of the data you gathered.
+int		ft_print_nonformat(t_container *var, int i)
 {
 	write(1, var->format + i, 1);
 	var->retval++;

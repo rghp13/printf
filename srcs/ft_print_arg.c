@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:27:17 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/07 20:50:05 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/08 17:53:45 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_print_char(t_container *var)
 {
-	char hold;
-	char *ptr;
-	int i;
+	char	hold;
+	char	*ptr;
+	int		i;
 
 	hold = va_arg(var->ap, char);
 	i = 0;
@@ -29,20 +29,24 @@ int	ft_print_char(t_container *var)
 		ptr[var->fwidth] = hold;
 	else
 		ptr[0] = hold;
-	ft_str_to_stdout(ptr);
+	var->retval += ft_str_to_stdout(ptr);
 	free(ptr);
 	return (0);
 }
+/*
+**TRUNCATE IF PRECISION IS SMALLER THAN STRING
+**OTHERWISE IF WIDTH IS SMALLER THAN STRING YOU CAN GO OVER
+*/
 
-int	ft_str_to_stdout(const char *str)
+int	ft_print_str(t_container *var)
 {
-	int i;
+	char	*hold;
+	int		len;
 
-	i = 0;
-	while((str[i]))
+	hold = va_arg(var->ap, char*);
+	len = ft_strlen(hold);
+	if (var->fprecision > 0 && var->fprecision < len)//this means there is truncation
 	{
-		ft_putchar_fd(str[i], STDOUT_FILENO);
-		i++;
+		ft_str_trunc(hold, var);
 	}
-	return (i);
 }

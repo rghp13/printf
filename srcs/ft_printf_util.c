@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:15:47 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/06 15:02:31 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/08 17:53:43 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,82 +22,36 @@ void	ft_struct_init(t_container *var)
 	return ;
 }
 
-int		ft_flag_check(t_container *var, int i)
+int		ft_str_to_stdout(const char *str)
 {
-	int diff;
+	int	i;
 
-	diff = i;
-	ft_struct_init(var);
-	i += ft_parse_flag(var, i);
-	i += ft_parse_precision(var, i);
-	i += ft_parse_type(var, i, VALTYPE);
-	return (i - diff);
-}
-
-int		ft_parse_type(t_container *var, int i, char *type)
-{
-	char	*ptr;
-	int		diff;
-
-	diff = i;
-	while (ft_strchr(type, var->format[i]) == 0 && var->format[i] != '\0')
-		i++;
-	if (var->format[i])
-		var->type = var->format[i];
-	return (i - diff);
-}
-
-int		ft_parse_precision(t_container *var, int i)
-{
-	char	hold;
-	int		diff;
-
-	diff = i;
-	hold = var->format[i];
-	if (hold == '.')
+	i = 0;
+	while ((str[i]))
 	{
-		i++;
-		if (var->format[i] == '*')
-			var->fprecision = va_arg(var->ap, int);
-		else if (var->format[i] > '0' && var->format[i] <= '9')
-		{
-			var->fprecision = ft_atoi(var->format + i);
-			while (ft_isdigit(var->format[i]))
-				i++;
-			i--;
-		}
-		else
-			return (i - diff);
+		ft_putchar_fd(str[i], STDOUT_FILENO);
 		i++;
 	}
-	return (i - diff);
+	return (i);
 }
 
-int		ft_parse_flag(t_container *var, int i)
+int		ft_str_trunc(char *src, t_container *var)
 {
-	char	hold;
-	int		diff;
+	char	*str;
 
-	diff = i;
-	while (TRUE)
+	if (var->fprecision < var->fwidth)//there is padding
 	{
-		hold = var->format[i];
-		if (hold == '-')
-			var->fleft = 1;
-		else if (hold == '0')
-			var->fzero = 1;
-		else if (hold == '*')
-			var->fwidth = va_arg(var->ap, int);
-		else if (hold > '0' && hold <= '9')
-		{
-			var->fwidth = ft_atoi(var->format + i);
-			while (ft_isdigit(var->format[i]))
-				i++;
-			i--;
-		}
+		if (!(str = malloc(sizeof(char) * var->fwidth + 1)))
+			return (-1);
+		str[var->fwidth + 1] = '\0';
+		ft_memset(str, ' ', var->fwidth);//filled string with space
+		if (var->fleft)
+			ft_memcpy(str, src, var->fprecision);
 		else
-			break ;
-		i++;
+			ft_memcpy(str + (var->fwidth - var->fprecision), src, var->fprecision);
 	}
-	return (i - diff);
+	else //no padding
+	{
+		src[var->fprecision] = '\0';//FOR TOMORROW, THINK ABOUT WHAT MIGHT HAPPEN IF YOU INIT A POINTER BUT DONT USE AND MIGHT NEED TO FREE IT
+	}
 }

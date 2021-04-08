@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 02:34:37 by romain            #+#    #+#             */
-/*   Updated: 2021/04/07 20:50:17 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/08 16:57:51 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ int					ft_print_hex(t_container *var);
 int					ft_print_percent(t_container *var);
 int					ft_print_nonformat(t_container *var, int i);
 int					ft_str_to_stdout(const char *str);
+int					ft_str_trunc(char *str, t_container *var);
 
 #endif

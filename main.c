@@ -12,11 +12,13 @@
 
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 int	main()
 {
 	char	hold[] = "Hello";
-
+	
+	system("Testing");
 	printf("5%010.8shi\n", hold);
 	return (0);
 }

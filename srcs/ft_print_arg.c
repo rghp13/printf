@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:27:17 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/08 17:53:45 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/09 22:53:23 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,18 @@ int	ft_print_char(t_container *var)
 int	ft_print_str(t_container *var)
 {
 	char	*hold;
+	char	*ptr;
 	int		len;
 
 	hold = va_arg(var->ap, char*);
 	len = ft_strlen(hold);
 	if (var->fprecision > 0 && var->fprecision < len)//this means there is truncation
-	{
 		ft_str_trunc(hold, var);
+	else//no trunc
+	{
+		if (var->fwidth > len)
+		{
+			if (!(ptr = malloc(sizeof(char) * var->fwidth + 1)))
+		}
 	}
 }

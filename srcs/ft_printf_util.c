@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:15:47 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/08 17:53:43 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/09 19:32:02 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ int		ft_str_trunc(char *src, t_container *var)
 		if (var->fleft)
 			ft_memcpy(str, src, var->fprecision);
 		else
-			ft_memcpy(str + (var->fwidth - var->fprecision), src, var->fprecision);
+			ft_memcpy(str + (var->fwidth - var->fprecision),\
+			src, var->fprecision);
+		var->retval = ft_str_to_stdout(str);
 	}
 	else //no padding
 	{

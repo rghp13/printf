@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_printf_hex.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/02 12:28:59 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/12 17:51:31 by rponsonn         ###   ########.fr       */
+/*   Created: 2021/04/12 17:31:24 by rponsonn          #+#    #+#             */
+/*   Updated: 2021/04/12 17:39:09 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
 #include "printf.h"
 
-int	main(void)
+char				*ft_convert_address(unsigned long int address)
 {
-	unsigned long i;
+	unsigned char table[100];
+	int i;
 
-	i = 0;
-	i = ~i;
-	printf("%lu\n", i);
-	return (0);
+	
 }

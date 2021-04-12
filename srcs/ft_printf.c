@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 02:32:40 by romain            #+#    #+#             */
-/*   Updated: 2021/04/08 14:16:40 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/12 15:07:34 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_read(t_container *var)
 			if (processed && var->type)
 			{
 				if (ft_print_arg(var) < 0)
-					printf("Error, entered ft_print_arg with no type");
+					ft_putstr_fd("Error, entered ft_print_arg with no type", 1);
 				i += processed;
 			}
 			else
@@ -63,6 +63,9 @@ int		ft_print_arg(t_container *var)
 		ft_print_hex(var);
 	else if (var->type == '%')
 		ft_print_percent(var);
+	else
+		return (-1);
+	return (0);
 }
 
 int		ft_print_nonformat(t_container *var, int i)

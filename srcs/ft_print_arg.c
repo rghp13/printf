@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:27:17 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/10 15:10:35 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/12 17:39:05 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	ft_print_char(t_container *var)
 	free(ptr);
 	return (0);
 }
+
 /*
 **TRUNCATE IF PRECISION IS SMALLER THAN STRING
 **OTHERWISE IF WIDTH IS SMALLER THAN STRING YOU CAN GO OVER
@@ -46,14 +47,36 @@ int	ft_print_str(t_container *var)
 
 	hold = va_arg(var->ap, char*);
 	len = ft_strlen(hold);
-	if (var->fprecision > 0 && var->fprecision < len)//this means there is truncation
+	if (var->fprecision > 0 && var->fprecision < len)
 		ft_str_trunc(hold, var);
-	else//no trunc
+	else
 	{
 		if (var->fwidth > len)
 		{
-			if (!(ptr = malloc(sizeof(char) * var->fwidth + 1)))
-				return (-1);
+			ft_printstrwhitespace(var, hold, len);
 		}
+		else
+			var->retval += ft_str_to_stdout(hold);
 	}
+	return (0);
+}
+
+/*
+**left adjust works, 0 fill does not.
+**there is no precision.
+*/
+
+int	ft_print_address(t_container *var)
+{
+	unsigned long int	address;
+	char				*str;
+
+	address = va_arg(var->ap, unsigned long int);
+	str = ft_convert_address(address);
+	if (var->fwidth > ft_strlen(str))
+		ft_printstrwhitespace(var, str, ft_strlen(str));
+	else
+		var->retval += ft_str_to_stdout(str);
+	free(str);
+	return (0);
 }

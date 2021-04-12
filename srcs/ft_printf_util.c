@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:15:47 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/10 15:10:30 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/12 17:32:09 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,31 +34,40 @@ int		ft_str_to_stdout(const char *str)
 	}
 	return (i);
 }
-/*
-**
-*/
+
 int		ft_str_trunc(char *src, t_container *var)
 {
 	char	*str;
 
 	if (var->fprecision < var->fwidth)
 	{
-		if (!(str = malloc(sizeof(char) * (var->fwidth + 1))))
-			return (-1);
-		str[var->fwidth] = '\0';
-		ft_memset(str, ' ', var->fwidth);
-		if (var->fleft)
-			ft_memcpy(str, src, var->fprecision);
-		else
-			ft_memcpy(str + (var->fwidth - var->fprecision),\
-			src, var->fprecision);
-		var->retval += ft_str_to_stdout(str);
-		free(str);
+		ft_printstrwhitespace(var, src, var->fprecision);
 	}
 	else
 	{
 		src[var->fprecision] = '\0';
 		var->retval += ft_str_to_stdout(src);
 	}
+	return (0);
+}
+
+/*
+**len has to be strlen or precision
+*/
+
+int		ft_printstrwhitespace(t_container *var, char *src, int len)
+{
+	char	*ptr;
+
+	if (!(ptr = malloc(sizeof(char) * (var->fwidth + 1))))
+		return (-1);
+	ptr[var->fwidth] = '\0';
+	ft_memset(ptr, ' ', var->fwidth);
+	if (var->fleft)
+		ft_memcpy(ptr, src, len);
+	else
+		ft_memcpy(ptr + (var->fwidth - len), src, len);
+	var->retval += ft_str_to_stdout(ptr);
+	free(ptr);
 	return (0);
 }

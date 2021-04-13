@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:27:17 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/12 17:39:05 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/13 17:35:05 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,26 @@ int	ft_print_str(t_container *var)
 int	ft_print_address(t_container *var)
 {
 	unsigned long int	address;
-	char				*str;
+	char				*hex;
+	char				*ptr;
 
 	address = va_arg(var->ap, unsigned long int);
-	str = ft_convert_address(address);
-	if (var->fwidth > ft_strlen(str))
-		ft_printstrwhitespace(var, str, ft_strlen(str));
+	hex = ft_itoa_hex(address);
+	ptr = ft_strjoin("0x", hex);
+	free(hex);
+	if (var->fwidth > ft_strlen(ptr))
+		ft_printstrwhitespace(var, ptr, ft_strlen(ptr));
 	else
-		var->retval += ft_str_to_stdout(str);
-	free(str);
+		var->retval += ft_str_to_stdout(ptr);
+	free(ptr);
 	return (0);
+}
+
+/*
+**
+*/
+
+int ft_print_int(t_container *var)
+{
+	
 }

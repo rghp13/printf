@@ -6,7 +6,7 @@
 #    By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/24 15:09:42 by rponsonn          #+#    #+#              #
-#    Updated: 2021/03/25 14:04:49 by rponsonn         ###   ########.fr        #
+#    Updated: 2021/04/13 16:36:35 by rponsonn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ OBJS			=	$(SRCS:.c=.o)
 
 BONUS			=	${PATH_SRC}ft_lstnew.c ${PATH_SRC}ft_lstadd_front.c ${PATH_SRC}ft_lstsize.c ${PATH_SRC}ft_lstlast.c \
 					${PATH_SRC}ft_lstadd_back.c ${PATH_SRC}ft_lstdelone.c ${PATH_SRC}ft_lstclear.c ${PATH_SRC}ft_lstiter.c \
-					${PATH_SRC}ft_lstmap.c ${PATH_SRC}get_next_line_utils.c ${PATH_SRC}get_next_line.c
+					${PATH_SRC}ft_lstmap.c ${PATH_SRC}get_next_line_utils.c ${PATH_SRC}get_next_line.c ${PATH_SRC}ft_itoa_hex.c
 BOBJS			=	$(BONUS:.c=.o)
 
 NAME			=	libft.a

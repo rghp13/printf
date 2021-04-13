@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   itoa_hex.c                                         :+:      :+:    :+:   */
+/*   ft_itoa_hex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 17:40:50 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/12 18:16:11 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/13 16:52:51 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@
 **take an int convert to hex values strdup it and return the str
 */
 
-char	*ft_itoa_hex(unsigned long long hex)
+char	*ft_itoa_hex(unsigned long hex)
 {
 	char	table[MAXTABLE + 1];
+	char	*ptr;
 	int		i;
 
 	i = MAXTABLE;
@@ -29,8 +30,18 @@ char	*ft_itoa_hex(unsigned long long hex)
 		table[i--] = '0';
 	while (hex > 0 && i >= 0)
 	{
-		table[i--] = hex % HEXADECIMAL;
+		table[i] = hex % HEXADECIMAL;
+		if (table[i] >= 0 && table[i] <= 9)
+			table[i] += ASCII;
+		else if (table[i] > 9 && table[i] <= HEXADECIMAL)
+			table[i] += (-10 + 'a');
+		i--;
 		hex /= HEXADECIMAL;
 	}
 	i++;
+	ptr = ft_strdup(table + i);
+	if (ptr == NULL)
+		return (NULL);
+	else
+		return (ptr);
 }

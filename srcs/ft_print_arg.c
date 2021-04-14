@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:27:17 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/13 17:35:05 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/14 18:50:05 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,32 @@ int	ft_print_address(t_container *var)
 
 int ft_print_int(t_container *var)
 {
-	
+	;
+}
+
+/*
+**0flag ignored, extra precision prefixes string with 0's but blank space still needed if
+**the width is bigger than precision
+*/
+
+int ft_print_hex(t_container *var)
+{
+	unsigned	hexval;
+	char		*hex;
+	char		*hold;
+
+	hexval = va_arg(var->ap, unsigned int);
+	hex = ft_itoa_hex(hexval);
+	if (ft_strlen(hex) < var->fprecision)
+	{
+		hold = ft_hexprecision(var, hex);
+		free(hex);
+		hex = hold;
+	}
+	if (var->fwidth > ft_strlen(hex))
+		ft_printstrwhitespace(var, hex, strlen(hex));
+	else
+		var->retval += ft_str_to_stdout(hex);
+	free(hex);
+	return (0);
 }

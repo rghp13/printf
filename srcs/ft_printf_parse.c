@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:14:34 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/08 14:14:54 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/15 18:10:20 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int		ft_flag_check(t_container *var, int i)
 
 int		ft_parse_type(t_container *var, int i, char *type)
 {
-	char	*ptr;
 	int		diff;
 
 	diff = i;

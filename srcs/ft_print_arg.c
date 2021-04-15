@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:27:17 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/14 18:50:05 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/15 18:31:43 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_print_char(t_container *var)
 	char	*ptr;
 	int		i;
 
-	hold = va_arg(var->ap, char);
+	hold = va_arg(var->ap, int);
 	i = 0;
 	if (!(ptr = malloc(sizeof(char) * var->fwidth + 1)))
 		return (-1);
@@ -42,7 +42,6 @@ int	ft_print_char(t_container *var)
 int	ft_print_str(t_container *var)
 {
 	char	*hold;
-	char	*ptr;
 	int		len;
 
 	hold = va_arg(var->ap, char*);
@@ -76,7 +75,7 @@ int	ft_print_address(t_container *var)
 	hex = ft_itoa_hex(address);
 	ptr = ft_strjoin("0x", hex);
 	free(hex);
-	if (var->fwidth > ft_strlen(ptr))
+	if ((size_t)var->fwidth > ft_strlen(ptr))
 		ft_printstrwhitespace(var, ptr, ft_strlen(ptr));
 	else
 		var->retval += ft_str_to_stdout(ptr);
@@ -85,12 +84,30 @@ int	ft_print_address(t_container *var)
 }
 
 /*
-**
+**0fill ignored if left adjusted. 0 prepend if precision is bigger than num len
+**still add blank space if width is bigger. ignore 0 fill if there is any precision
 */
 
 int ft_print_int(t_container *var)
 {
-	;
+	int		num;
+	char	*str;
+	char	*hold;
+
+	num = va_arg(var->ap, int);
+	str = ft_itoa(num);
+	if (ft_strlen(str) < (size_t)var->fprecision)
+	{
+		hold = ft_prefprecision(var, str);
+		free(str);
+		str = hold;
+	}
+	if ((size_t)var->fwidth > ft_strlen(str))
+		ft_printstrwhitespace(var, str, ft_strlen(str));
+	else
+		var->retval += ft_str_to_stdout(str);
+	free(str);
+	return (0);
 }
 
 /*
@@ -106,13 +123,13 @@ int ft_print_hex(t_container *var)
 
 	hexval = va_arg(var->ap, unsigned int);
 	hex = ft_itoa_hex(hexval);
-	if (ft_strlen(hex) < var->fprecision)
+	if (ft_strlen(hex) < (size_t)var->fprecision)
 	{
-		hold = ft_hexprecision(var, hex);
+		hold = ft_prefprecision(var, hex);
 		free(hex);
 		hex = hold;
 	}
-	if (var->fwidth > ft_strlen(hex))
+	if ((size_t)var->fwidth > ft_strlen(hex))
 		ft_printstrwhitespace(var, hex, strlen(hex));
 	else
 		var->retval += ft_str_to_stdout(hex);

@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 02:32:40 by romain            #+#    #+#             */
-/*   Updated: 2021/04/13 17:35:08 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/15 18:08:50 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int		ft_print_nonformat(t_container *var, int i)
 {
 	write(1, var->format + i, 1);
 	var->retval++;
+	return (0);
 }
 
 int		ft_printf(const char *format, ...)
@@ -81,7 +82,8 @@ int		ft_printf(const char *format, ...)
 	var.format = format;
 	var.retval = 0;
 	ft_struct_init(&var);
-	va_start(var.ap, var.format);
+	va_start(var.ap, format);
 	ft_read(&var);
+	va_end(var.ap);
 	return (var.retval);
 }

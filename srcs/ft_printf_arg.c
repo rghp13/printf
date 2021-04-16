@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_arg.c                                     :+:      :+:    :+:   */
+/*   ft_printf_arg.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:27:17 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/15 18:31:43 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/16 14:55:17 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,10 @@ int	ft_print_address(t_container *var)
 
 /*
 **0fill ignored if left adjusted. 0 prepend if precision is bigger than num len
-**still add blank space if width is bigger. ignore 0 fill if there is any precision
+**still add blank space if width is bigger. ignore 0 fill if there is any prec
 */
 
-int ft_print_int(t_container *var)
+int	ft_print_int(t_container *var)
 {
 	int		num;
 	char	*str;
@@ -111,11 +111,11 @@ int ft_print_int(t_container *var)
 }
 
 /*
-**0flag ignored, extra precision prefixes string with 0's but blank space still needed if
-**the width is bigger than precision
+**0flag ignored, extra precision prefixes string with 0's but
+**blank space still needed if the width is bigger than precision
 */
 
-int ft_print_hex(t_container *var)
+int	ft_print_hex(t_container *var)
 {
 	unsigned	hexval;
 	char		*hex;

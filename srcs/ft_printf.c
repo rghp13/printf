@@ -6,12 +6,12 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 02:32:40 by romain            #+#    #+#             */
-/*   Updated: 2021/04/15 18:08:50 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/16 15:10:06 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
+#include <stdio.h>
 /*
 ** - = left justify
 ** 0 = left pad with 0s instead of spaces where padding is requested
@@ -49,6 +49,11 @@ void	ft_read(t_container *var)
 
 int		ft_print_arg(t_container *var)
 {
+	printf("Container Values\nFzero = %d\n", var->fzero);
+	printf("Fleft = %d\n", var->fleft);
+	printf("Fwidth = %d\n", var->fwidth);
+	printf("Fprecision = %d\n", var->fprecision);
+	printf("Ftype = %c\n", var->type);
 	if (var->type == 'c')
 		ft_print_char(var);
 	else if (var->type == 's')
@@ -61,8 +66,8 @@ int		ft_print_arg(t_container *var)
 		ft_print_uint(var);
 	else if (var->type == 'x' || var->type == 'X')
 		ft_print_hex(var);
-	else if (var->type == '%')
-		ft_print_percent(var);
+	//else if (var->type == '%')
+		//ft_print_percent(var);
 	else
 		return (-1);
 	return (0);

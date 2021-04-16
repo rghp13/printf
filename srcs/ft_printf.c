@@ -6,17 +6,19 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 02:32:40 by romain            #+#    #+#             */
-/*   Updated: 2021/04/16 15:10:06 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/16 17:59:21 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
+
 /*
 ** - = left justify
 ** 0 = left pad with 0s instead of spaces where padding is requested
 **num= for digits it sets minimum amt of space.
-** . = precision, on floats it shows how far to go, on ints it shows the minimum amount of digits to write, for strings this is the maximum space you can take(will truncate)
+** . = precision, on floats it shows how far to go, on ints it shows the
+**minimum amount of digits to write, for strings this is the maximum space
+**you can take(will truncate)
 ** .*= precision is the previous argument.
 **main function initializes, second starts outputting chars, if
 */
@@ -33,11 +35,11 @@ void	ft_read(t_container *var)
 		if (var->format[i] == '%' && var->format[i + 1] != '\0')
 		{
 			processed = ft_flag_check(var, ++i);
-			if (processed && var->type)
+			i += processed;
+			if (var->type)
 			{
 				if (ft_print_arg(var) < 0)
 					ft_putstr_fd("Error, entered ft_print_arg with no type", 1);
-				i += processed;
 			}
 			else
 				ft_print_nonformat(var, i);
@@ -49,11 +51,6 @@ void	ft_read(t_container *var)
 
 int		ft_print_arg(t_container *var)
 {
-	printf("Container Values\nFzero = %d\n", var->fzero);
-	printf("Fleft = %d\n", var->fleft);
-	printf("Fwidth = %d\n", var->fwidth);
-	printf("Fprecision = %d\n", var->fprecision);
-	printf("Ftype = %c\n", var->type);
 	if (var->type == 'c')
 		ft_print_char(var);
 	else if (var->type == 's')
@@ -66,8 +63,8 @@ int		ft_print_arg(t_container *var)
 		ft_print_uint(var);
 	else if (var->type == 'x' || var->type == 'X')
 		ft_print_hex(var);
-	//else if (var->type == '%')
-		//ft_print_percent(var);
+	else if (var->type == '%')
+		ft_print_percent(var);
 	else
 		return (-1);
 	return (0);

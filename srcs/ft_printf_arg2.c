@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:39:01 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/16 14:53:01 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/16 18:08:10 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,29 @@ int		ft_print_uint(t_container *var)
 		str = hold;
 	}
 	if ((size_t)var->fwidth > ft_strlen(str))
-		ft_printstrwhitespace(var, str, strlen(str));
+		ft_printstrwhitespace(var, str, ft_strlen(str));
+	else
+		var->retval += ft_str_to_stdout(str);
+	free(str);
+	return (0);
+}
+
+/*
+**ignore precision
+**width is followed
+**0fill is followed if no left adjust
+*/
+
+int		ft_print_percent(t_container *var)
+{
+	char	*str;
+
+	if (!(str = malloc(sizeof(char) * 2)))
+		return (-1);
+	str[0] = '%';
+	str[1] = '\0';
+	if ((size_t)var->fwidth > ft_strlen(str))
+		ft_printstrwhitespace(var, str, ft_strlen(str));
 	else
 		var->retval += ft_str_to_stdout(str);
 	free(str);

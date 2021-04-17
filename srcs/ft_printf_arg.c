@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_arg.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:27:17 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/17 16:19:01 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/17 22:18:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_print_str(t_container *var)
 
 	hold = va_arg(var->ap, char*);
 	len = ft_strlen(hold);
-	if (var->fprecision > 0 && var->fprecision < len)
+	if (var->fzp && var->fprecision < len)
 		ft_str_trunc(hold, var);
 	else
 	{

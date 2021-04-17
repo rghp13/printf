@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_parse.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:14:34 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/17 14:31:05 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/17 22:14:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		ft_parse_precision(t_container *var, int i)
 	if (hold == '.')
 	{
 		i++;
-		var->fprecision = 0;
+		var->fzp = TRUE;
 		if (var->format[i] == '*')
 			var->fprecision = va_arg(var->ap, int);
 		else if (var->format[i] >= '0' && var->format[i] <= '9')

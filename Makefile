@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    makefile                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/15 17:11:00 by rponsonn          #+#    #+#              #
-#    Updated: 2021/04/16 14:55:06 by rponsonn         ###   ########.fr        #
+#    Updated: 2021/04/17 21:50:03 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,9 +42,16 @@ ${NAME}:			${OBJS}
 					@ar -rcs ${NAME} ${OBJS}
 all:				${NAME}
 
-test:				${NAME}
+test:				
 					@echo Compiling Testing program
-					@gcc main.c ${NAME}
+					make bonus -C ${DIR_LIB}
+					cp ${DIR_LIB}${LIBFT_A} ${LIBFT_A}
+					cp ${DIR_HEAD}ft_printf.h ft_printf.h
+					cp ${DIR_HEAD}libft.h libft.h
+					cp ${DIR_HEAD}ft_printf.h ${DIR_SRC}ft_printf.h
+					cp ${DIR_HEAD}libft.h ${DIR_SRC}libft.h
+					gcc -g main.c ${SRCS} ${LIBFT_A}
+					rm -f ft_printf.h libft.h ${DIR_SRC}ft_printf.h ${DIR_SRC}libft.h ${LIBFT_A}
 					@echo Running test program
 					@./a.out
 

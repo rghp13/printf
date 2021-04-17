@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:27:17 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/16 14:55:17 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/17 16:19:01 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int	ft_print_address(t_container *var)
 /*
 **0fill ignored if left adjusted. 0 prepend if precision is bigger than num len
 **still add blank space if width is bigger. ignore 0 fill if there is any prec
+** RETOOL INT TO DEAL WITH -1 PRECISION THATS NOW A POSSIBILITY
 */
 
 int	ft_print_int(t_container *var)

@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:15:47 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/15 18:09:44 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/17 14:11:03 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_struct_init(t_container *var)
 {
 	var->fleft = 0;
-	var->fprecision = 0;
+	var->fprecision = -1;
 	var->fwidth = 0;
 	var->fzero = 0;
 	var->type = 0;
@@ -74,4 +74,3 @@ int		ft_printstrwhitespace(t_container *var, char *src, int len)
 	free(ptr);
 	return (0);
 }
-//REVISIT WHAT THIS FUNCTION DOES EXACTLY

@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:14:34 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/15 18:10:20 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/17 14:31:05 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,10 @@ int		ft_parse_precision(t_container *var, int i)
 	if (hold == '.')
 	{
 		i++;
+		var->fprecision = 0;
 		if (var->format[i] == '*')
 			var->fprecision = va_arg(var->ap, int);
-		else if (var->format[i] > '0' && var->format[i] <= '9')
+		else if (var->format[i] >= '0' && var->format[i] <= '9')
 		{
 			var->fprecision = ft_atoi(var->format + i);
 			while (ft_isdigit(var->format[i]))

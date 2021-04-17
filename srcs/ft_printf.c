@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 02:32:40 by romain            #+#    #+#             */
-/*   Updated: 2021/04/16 17:59:21 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/17 13:37:03 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 **you can take(will truncate)
 ** .*= precision is the previous argument.
 **main function initializes, second starts outputting chars, if
+** 0 precision + 0 value on the value == no output
+** 0 precision on string is no output no matter the value
 */
 
 void	ft_read(t_container *var)

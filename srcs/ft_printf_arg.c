@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_arg.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:27:17 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/17 22:18:54 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/18 22:01:02 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ int	ft_print_hex(t_container *var)
 
 	hexval = va_arg(var->ap, unsigned int);
 	hex = ft_itoa_hex(hexval);
+	if (var->type == 'X')
+		hex = ft_strupcase(hex);
 	if (ft_strlen(hex) < (size_t)var->fprecision)
 	{
 		hold = ft_prefprecision(var, hex);

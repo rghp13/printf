@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/15 17:11:00 by rponsonn          #+#    #+#              #
-#    Updated: 2021/04/17 21:50:03 by marvin           ###   ########.fr        #
+#    Updated: 2021/04/18 21:13:04 by rponsonn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,8 +34,6 @@ CFLAGS			=	-Wall -Wextra -Werror
 					${CC} ${CFLAGS} -I${DIR_HEAD} -c $< -o ${<:.c=.o}
 
 ${NAME}:			${OBJS}
-					@echo LIBFT START
-					@sleep 2
 					@make bonus -C ${DIR_LIB}
 					@echo Copying ${LIBFT_A} to root
 					@cp ${DIR_LIB}${LIBFT_A} ${NAME}

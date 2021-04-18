@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 16:54:10 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/16 14:42:45 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/18 21:56:00 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ void			ft_lstiter(t_list *lst, void (*f)(void *));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *), void (*d)(void *));
 char			*ft_itoa_hex(unsigned long hex);
 char			*ft_utoa(unsigned n);
+char			*ft_strupcase(char *str);
 
 #endif

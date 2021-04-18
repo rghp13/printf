@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strupper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/02 12:28:59 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/18 22:02:10 by rponsonn         ###   ########.fr       */
+/*   Created: 2021/04/18 21:52:50 by rponsonn          #+#    #+#             */
+/*   Updated: 2021/04/18 21:53:07 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include "includes/ft_printf.h"
+#include "libft.h"
+#define UPPER 32
 
-int	main(void)
+char	*ft_strupcase(char *str)
 {
-	unsigned num;
+	int i;
 
-	num = 0x7fffffff;
-	ft_printf("%x\n", num);
-	ft_printf("%X\n", num);
-	return (0);
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] >= 'a' && str[i] <= 'z')
+			str[i] -= UPPER;
+		i++;
+	}
+	return (str);
 }

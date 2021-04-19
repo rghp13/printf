@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 02:34:37 by romain            #+#    #+#             */
-/*   Updated: 2021/04/17 22:08:57 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/19 13:48:15 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ int					ft_str_to_stdout(const char *str);
 int					ft_str_trunc(char *str, t_container *var);
 int					ft_printstrwhitespace(t_container *var, char *src, int len);
 char				*ft_prefprecision(t_container *var, char *str);
+void				ft_parse_sanitize(t_container *var);
 
 #endif

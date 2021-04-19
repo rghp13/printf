@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:27:17 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/18 22:01:02 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/19 13:30:43 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ int	ft_print_address(t_container *var)
 	hex = ft_itoa_hex(address);
 	ptr = ft_strjoin("0x", hex);
 	free(hex);
+	if (var->fprecision == 0 && var->fzp && address == 0)
+		ptr[2] = '\0';
 	if ((size_t)var->fwidth > ft_strlen(ptr))
 		ft_printstrwhitespace(var, ptr, ft_strlen(ptr));
 	else
@@ -97,6 +99,8 @@ int	ft_print_int(t_container *var)
 
 	num = va_arg(var->ap, int);
 	str = ft_itoa(num);
+	if (var->fzp && var->fprecision == 0 && num == 0)
+		str[0] = '\0';
 	if (ft_strlen(str) < (size_t)var->fprecision)
 	{
 		hold = ft_prefprecision(var, str);

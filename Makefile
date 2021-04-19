@@ -6,7 +6,7 @@
 #    By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/15 17:11:00 by rponsonn          #+#    #+#              #
-#    Updated: 2021/04/18 21:13:04 by rponsonn         ###   ########.fr        #
+#    Updated: 2021/04/19 13:15:43 by rponsonn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCS			=	${DIR_SRC}ft_printf.c ${DIR_SRC}ft_printf_util.c ${DIR_SRC}ft_printf_pa
 					${DIR_SRC}ft_printf_hex.c ${DIR_SRC}ft_printf_arg.c ${DIR_SRC}ft_printf_arg2.c
 OBJS			=	$(SRCS:.c=.o)
 
-NAME			=	printf.a
+NAME			=	libftprintf.a
 LIBFT_A			=	libft.a
 CC				=	gcc
 RM				=	rm -f

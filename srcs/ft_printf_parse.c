@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_parse.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:14:34 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/17 22:14:30 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/19 13:47:36 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int		ft_flag_check(t_container *var, int i)
 	i += ft_parse_flag(var, i);
 	i += ft_parse_precision(var, i);
 	i += ft_parse_type(var, i, VALTYPE);
+	ft_parse_sanitize(var);
 	return (i - diff);
 }
 
@@ -90,4 +91,15 @@ int		ft_parse_flag(t_container *var, int i)
 		i++;
 	}
 	return (i - diff);
+}
+
+void	ft_parse_sanitize(t_container *var)
+{
+	if (var->fwidth < 0)
+		var->fwidth = 0;
+	if (var->fprecision < 0)
+	{
+		var->fprecision = 0;
+		var->fzp = FALSE;
+	}
 }

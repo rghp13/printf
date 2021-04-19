@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:27:17 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/19 13:30:43 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/19 17:28:49 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int	ft_print_address(t_container *var)
 **0fill ignored if left adjusted. 0 prepend if precision is bigger than num len
 **still add blank space if width is bigger. ignore 0 fill if there is any prec
 ** RETOOL INT TO DEAL WITH -1 PRECISION THATS NOW A POSSIBILITY
+**RETOOL ITOA FOR NEG NUMBERS THAT NEED TO BE 0 FILLED FIRST
 */
 
 int	ft_print_int(t_container *var)
@@ -98,16 +99,16 @@ int	ft_print_int(t_container *var)
 	char	*hold;
 
 	num = va_arg(var->ap, int);
-	str = ft_itoa(num);
+	str = ft_abs_itoa(num);
 	if (var->fzp && var->fprecision == 0 && num == 0)
 		str[0] = '\0';
 	if (ft_strlen(str) < (size_t)var->fprecision)
 	{
-		hold = ft_prefprecision(var, str);
+		hold = ft_prefprecision(var, str, num);
 		free(str);
 		str = hold;
 	}
-	if ((size_t)var->fwidth > ft_strlen(str))
+	if ((size_t)var->fwidth > (ft_strlen(str) - (num < 0)))
 		ft_printstrwhitespace(var, str, ft_strlen(str));
 	else
 		var->retval += ft_str_to_stdout(str);
@@ -132,7 +133,7 @@ int	ft_print_hex(t_container *var)
 		hex = ft_strupcase(hex);
 	if (ft_strlen(hex) < (size_t)var->fprecision)
 	{
-		hold = ft_prefprecision(var, hex);
+		hold = ft_prefprecision(var, hex, 0);
 		free(hex);
 		hex = hold;
 	}

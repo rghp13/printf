@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_util.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:15:47 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/17 22:09:29 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/19 17:26:33 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,13 @@ int		ft_printstrwhitespace(t_container *var, char *src, int len)
 	var->retval += ft_str_to_stdout(ptr);
 	free(ptr);
 	return (0);
+}
+
+char	*ft_abs_itoa(int num)
+{
+	char	*ptr;
+
+	num = -num;
+	ptr = ft_itoa(num);
+	return (ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:14:34 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/19 13:47:36 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/19 15:13:14 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,10 @@ int		ft_parse_flag(t_container *var, int i)
 void	ft_parse_sanitize(t_container *var)
 {
 	if (var->fwidth < 0)
-		var->fwidth = 0;
+	{
+		var->fwidth = -var->fwidth;
+		var->fleft = TRUE;
+	}
 	if (var->fprecision < 0)
 	{
 		var->fprecision = 0;

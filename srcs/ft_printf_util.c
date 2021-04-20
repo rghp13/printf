@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:15:47 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/19 17:26:33 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/20 18:06:00 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_struct_init(t_container *var)
 	var->fzero = 0;
 	var->type = 0;
 	var->fzp = FALSE;
+	var->negflag = FALSE;
 	return ;
 }
 
@@ -79,8 +80,11 @@ int		ft_printstrwhitespace(t_container *var, char *src, int len)
 char	*ft_abs_itoa(int num)
 {
 	char	*ptr;
+	long	lnum;
 
-	num = -num;
-	ptr = ft_itoa(num);
+	lnum = num;
+	if (lnum < 0)
+		lnum = -lnum;
+	ptr = ft_itoa(lnum);
 	return (ptr);
 }

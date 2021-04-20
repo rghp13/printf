@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 12:28:59 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/19 17:34:19 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/20 17:53:49 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int	main(void)
 {
-/*	int		a = -4;
+	int		a = -4;
 	int		b = 0;
 	char	c = 'a';
 	int		d = 2147483647;
@@ -38,9 +38,10 @@ int	main(void)
 	char	*s = "-2147483648";
 	char	*t = "0x12345678";
 	char	*u = "-0";
-*/
-	ft_printf("%.*d\n", 4, -12);
-	printf("%.*d\n", 4, -12);
+
+	a = 4;
+	ft_printf(".%0*.*d.\n", 5, 0, 0);
+	printf(".%0*.*d.\n", 5, 0, 0);
 	return (0);
 }
 

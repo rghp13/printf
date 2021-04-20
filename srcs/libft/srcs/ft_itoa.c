@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   itoa.c                                             :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 15:21:06 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/01/30 13:34:10 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/20 13:26:48 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ static char	*ft_zero_string(void)
 	return (ptr);
 }
 
-char		*ft_itoa(int n)
+char		*ft_itoa(long int n)
 {
 	long int	num;
 	char		*ptr;
-	char		arr[12];
+	char		arr[30];
 	int			i;
 	int			neg;
 

@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 02:34:37 by romain            #+#    #+#             */
-/*   Updated: 2021/04/19 17:25:16 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/20 17:46:18 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct		s_container
 	int				fwidth;
 	int				fprecision;
 	int				fzp;
+	int				negflag;
 	char			type;
 }					t_container;
 
@@ -56,5 +57,8 @@ int					ft_printstrwhitespace(t_container *var, char *src, int len);
 char				*ft_prefprecision(t_container *var, char *str, int num);
 void				ft_parse_sanitize(t_container *var);
 char				*ft_abs_itoa(int num);
+int					ft_printnegint(t_container *var, char *src, int len);
+void				ft_join_print_int(t_container *var, char *str, int num);
+int					ft_zero_valprec(t_container *var, char *str);
 
 #endif

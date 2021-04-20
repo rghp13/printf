@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:27:17 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/19 17:28:49 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/20 18:04:56 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,17 +101,22 @@ int	ft_print_int(t_container *var)
 	num = va_arg(var->ap, int);
 	str = ft_abs_itoa(num);
 	if (var->fzp && var->fprecision == 0 && num == 0)
-		str[0] = '\0';
+	{
+		ft_zero_valprec(var, str);
+		return (0);
+	}
 	if (ft_strlen(str) < (size_t)var->fprecision)
 	{
 		hold = ft_prefprecision(var, str, num);
 		free(str);
 		str = hold;
 	}
-	if ((size_t)var->fwidth > (ft_strlen(str) - (num < 0)))
-		ft_printstrwhitespace(var, str, ft_strlen(str));
+	if ((size_t)var->fwidth > ft_strlen(str) && (var->negflag || num >= 0))
+		ft_printstrwhitespace(var, str, strlen(str));
+	else if ((size_t)var->fwidth > ft_strlen(str))
+		ft_printnegint(var, str, strlen(str));
 	else
-		var->retval += ft_str_to_stdout(str);
+		ft_join_print_int(var, str, num);
 	free(str);
 	return (0);
 }

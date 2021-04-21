@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:39:01 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/19 16:06:14 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/21 14:54:54 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int		ft_print_uint(t_container *var)
 
 	num = va_arg(var->ap, unsigned int);
 	str = ft_utoa(num);
+	if (var->fzp && var->fprecision == 0 && num == 0)
+		return (ft_zero_valprec(var, str));
 	if (ft_strlen(str) < (size_t)var->fprecision)
 	{
 		hold = ft_prefprecision(var, str, 0);

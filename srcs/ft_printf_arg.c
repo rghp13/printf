@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:27:17 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/20 18:04:56 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/21 14:57:47 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	ft_print_str(t_container *var)
 	int		len;
 
 	hold = va_arg(var->ap, char*);
+	hold = ft_strdup(hold);
 	len = ft_strlen(hold);
 	if (var->fzp && var->fprecision < len)
 		ft_str_trunc(hold, var);
@@ -57,6 +58,7 @@ int	ft_print_str(t_container *var)
 		else
 			var->retval += ft_str_to_stdout(hold);
 	}
+	free(hold);
 	return (0);
 }
 
@@ -101,10 +103,7 @@ int	ft_print_int(t_container *var)
 	num = va_arg(var->ap, int);
 	str = ft_abs_itoa(num);
 	if (var->fzp && var->fprecision == 0 && num == 0)
-	{
-		ft_zero_valprec(var, str);
-		return (0);
-	}
+		return (ft_zero_valprec(var, str));
 	if (ft_strlen(str) < (size_t)var->fprecision)
 	{
 		hold = ft_prefprecision(var, str, num);
@@ -134,6 +133,8 @@ int	ft_print_hex(t_container *var)
 
 	hexval = va_arg(var->ap, unsigned int);
 	hex = ft_itoa_hex(hexval);
+	if (var->fzp && var->fprecision == 0 && hexval == 0)
+		return (ft_zero_valprec(var, hex));
 	if (var->type == 'X')
 		hex = ft_strupcase(hex);
 	if (ft_strlen(hex) < (size_t)var->fprecision)

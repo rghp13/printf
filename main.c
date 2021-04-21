@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 12:28:59 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/20 17:53:49 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/21 14:36:40 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	main(void)
 	char	*u = "-0";
 
 	a = 4;
-	ft_printf(".%0*.*d.\n", 5, 0, 0);
-	printf(".%0*.*d.\n", 5, 0, 0);
+	ft_printf("%.*u, %.*x, %.*X\n", b, b, b, b, b, b);
+	printf("%.*u, %.*x, %.*X\n", b, b, b, b, b, b);
 	return (0);
 }
 
@@ -49,8 +49,4 @@ int	main(void)
 **if val is 0 and prec is 0 pdiuxX
 **(p still puts 0x prefix)
 **(don't need to do anything for c and s because 0 is null terminator)
-**NEW BUG == * BEING A NEGATIVE NUMBER IN PRECISION OR WIDTH
-**Negative precision is ignored. negative width is turned into positive
-**NEW BUG == if negative 2 digit gets 3 width you have to output -012 instead of -12
-**NEW BUG == find out why %0*d prints 0-12
 */

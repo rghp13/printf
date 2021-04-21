@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 02:32:40 by romain            #+#    #+#             */
-/*   Updated: 2021/04/17 13:37:03 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/21 14:43:45 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,7 @@ void	ft_read(t_container *var)
 			processed = ft_flag_check(var, ++i);
 			i += processed;
 			if (var->type)
-			{
-				if (ft_print_arg(var) < 0)
-					ft_putstr_fd("Error, entered ft_print_arg with no type", 1);
-			}
+				ft_print_arg(var);
 			else
 				ft_print_nonformat(var, i);
 		}

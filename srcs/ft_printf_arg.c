@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:27:17 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/21 14:57:47 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/21 17:41:11 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,18 @@
 int	ft_print_char(t_container *var)
 {
 	char	hold;
-	char	*ptr;
-	int		i;
 
 	hold = va_arg(var->ap, int);
-	i = 0;
-	if (!(ptr = malloc(sizeof(char) * var->fwidth + 1)))
-		return (-1);
-	ptr[var->fwidth + 1] = '\0';
-	while (var->fwidth > i)
-		ptr[i++] = ' ';
 	if (var->fleft)
-		ptr[var->fwidth] = hold;
+	{
+		var->retval += ft_char_print(hold);
+		var->retval += ft_pad_print(var->fwidth - 1);
+	}
 	else
-		ptr[0] = hold;
-	var->retval += ft_str_to_stdout(ptr);
-	free(ptr);
+	{
+		var->retval += ft_pad_print(var->fwidth - 1);
+		var->retval += ft_char_print(hold);
+	}
 	return (0);
 }
 
@@ -45,7 +41,10 @@ int	ft_print_str(t_container *var)
 	int		len;
 
 	hold = va_arg(var->ap, char*);
-	hold = ft_strdup(hold);
+	if (hold == NULL)
+		hold = ft_strdup("(null)");
+	else
+		hold = ft_strdup(hold);
 	len = ft_strlen(hold);
 	if (var->fzp && var->fprecision < len)
 		ft_str_trunc(hold, var);

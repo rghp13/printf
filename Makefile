@@ -6,7 +6,7 @@
 #    By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/15 17:11:00 by rponsonn          #+#    #+#              #
-#    Updated: 2021/04/19 13:15:43 by rponsonn         ###   ########.fr        #
+#    Updated: 2021/04/21 17:24:23 by rponsonn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ DIR_OBJ		=	obj/
 
 
 SRCS			=	${DIR_SRC}ft_printf.c ${DIR_SRC}ft_printf_util.c ${DIR_SRC}ft_printf_parse.c \
-					${DIR_SRC}ft_printf_hex.c ${DIR_SRC}ft_printf_arg.c ${DIR_SRC}ft_printf_arg2.c
+					${DIR_SRC}ft_printf_hex.c ${DIR_SRC}ft_printf_arg.c ${DIR_SRC}ft_printf_arg2.c \
+					${DIR_SRC}ft_printf_util2.c
 OBJS			=	$(SRCS:.c=.o)
 
 NAME			=	libftprintf.a

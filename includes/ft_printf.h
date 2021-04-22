@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 02:34:37 by romain            #+#    #+#             */
-/*   Updated: 2021/04/22 16:34:01 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/22 22:36:23 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define TRUE 1
 # define FALSE 0
 
-typedef struct		s_container
+typedef	struct		s_container
 {
 	va_list			ap;
 	const char		*format;
@@ -33,6 +33,16 @@ typedef struct		s_container
 	int				negflag;
 	char			type;
 }					t_container;
+
+typedef	struct		s_var
+{
+	int				len;
+	int				ret;
+	char			*hold;
+	char			*str;
+	unsigned long	ulong;
+
+}					t_var;
 
 int					ft_printf(const char *format, ...);
 void				ft_read(t_container *var);
@@ -62,5 +72,6 @@ int					ft_join_print_int(t_container *var, char *str, int num);
 int					ft_zero_valprec(t_container *var, char *str);
 int					ft_char_print(char a);
 int					ft_pad_print(int len);
+int					ft_str_setup_space(t_container *var, char *hold, int len);
 
 #endif

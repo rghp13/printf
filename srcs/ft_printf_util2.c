@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 17:09:10 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/21 17:26:34 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/22 20:07:28 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,17 @@ int	ft_pad_print(int len)
 		free(ptr);
 		return (len);
 	}
+	return (0);
+}
+
+int	ft_str_setup(t_container *var, char *hold, int len)
+{
+	if (var->fwidth > len)
+	{
+		if (ft_printstrwhitespace(var, hold, len) == -1)
+			return (-1);
+	}
+	else
+		var->retval += ft_str_to_stdout(hold);
 	return (0);
 }

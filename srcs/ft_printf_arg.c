@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:27:17 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/22 16:40:57 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/22 22:36:38 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,23 @@
 int	ft_print_char(t_container *var)
 {
 	char	hold;
+	int		ret;
 
 	hold = va_arg(var->ap, int);
 	if (var->fleft)
 	{
 		var->retval += ft_char_print(hold);
-		var->retval += ft_pad_print(var->fwidth - 1);
+		ret = ft_pad_print(var->fwidth - 1);
+		if (ret == -1)
+			return (-1);
+		var->retval = ret;
 	}
 	else
 	{
-		var->retval += ft_pad_print(var->fwidth - 1);
+		ret = ft_pad_print(var->fwidth - 1);
+		if (ret == -1)
+			return (-1);
+		var->retval += ret;
 		var->retval += ft_char_print(hold);
 	}
 	return (0);
@@ -35,7 +42,7 @@ int	ft_print_char(t_container *var)
 **OTHERWISE IF WIDTH IS SMALLER THAN STRING YOU CAN GO OVER
 */
 
-int	ft_print_str(t_container *var)
+int	ft_print_str(t_container *var)//GET THIS TO 25 LINES
 {
 	char	*hold;
 	int		len;
@@ -52,13 +59,11 @@ int	ft_print_str(t_container *var)
 		ft_str_trunc(hold, var);
 	else
 	{
-		if (var->fwidth > len)
+		if(ft_str_setup_space(var, hold, len) == -1)
 		{
-			if (ft_printstrwhitespace(var, hold, len) == -1)
-				return (-1);
+			free(hold);
+			return (-1);
 		}
-		else
-			var->retval += ft_str_to_stdout(hold);
 	}
 	free(hold);
 	return (0);
@@ -76,13 +81,22 @@ int	ft_print_address(t_container *var)
 	char				*ptr;
 
 	address = va_arg(var->ap, unsigned long int);
-	hex = ft_itoa_hex(address);
+	if ((hex = ft_itoa_hex(address)) == NULL)
+		return (-1);
 	ptr = ft_strjoin("0x", hex);
 	free(hex);
+	if (ptr == NULL)
+		return (-1);
 	if (var->fprecision == 0 && var->fzp && address == 0)
 		ptr[2] = '\0';
 	if ((size_t)var->fwidth > ft_strlen(ptr))
-		ft_printstrwhitespace(var, ptr, ft_strlen(ptr));
+	{
+		if ((ft_printstrwhitespace(var, ptr, ft_strlen(ptr))) == -1)
+		{
+			free(ptr);
+			return (-1);
+		}
+	}
 	else
 		var->retval += ft_str_to_stdout(ptr);
 	free(ptr);
@@ -103,14 +117,17 @@ int	ft_print_int(t_container *var)
 	char	*hold;
 	int		ret;
 
-	num = va_arg(var->ap, int);
-	str = ft_abs_itoa(num);
+	str = ft_abs_itoa(num = va_arg(var->ap, int));
+	if (str == NULL)
+		return (-1);
 	if (var->fzp && var->fprecision == 0 && num == 0)
 		return (ft_zero_valprec(var, str));
 	if (ft_strlen(str) < (size_t)var->fprecision)
 	{
-		hold = ft_prefprecision(var, str, num);
+		if ((hold = ft_prefprecision(var, str, num)) == NULL)
 		free(str);
+		if (hold == NULL)
+			return (-1);
 		str = hold;
 	}
 	if ((size_t)var->fwidth > ft_strlen(str) && (var->negflag || num >= 0))

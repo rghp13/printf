@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 12:28:59 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/22 16:17:11 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/22 19:28:20 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(void)
 	a = 0x7fffffff;
 	b = 0;
 	a++;
-	printf("%*d\n", a, 12345);
+	ft_printf("%d\n", printf("%*d\n", a, 12345));
 	//
 	//printf("\n%d\n", b);
 	return (0);

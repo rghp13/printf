@@ -6,20 +6,16 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 17:31:24 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/21 12:57:51 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/22 16:43:00 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-/*
-**unsure if this file will be necessary much longer
-*/
-
 char	*ft_convert_address(unsigned long int address)
 {
-	char *hex;
-	char *ptr;
+	char	*hex;
+	char	*ptr;
 
 	hex = ft_itoa_hex(address);
 	ptr = ft_strjoin("0x", hex);
@@ -52,10 +48,6 @@ char	*ft_prefprecision(t_container *var, char *str, int num)
 	return (result);
 }
 
-/*
-**so in this version you know that a - is needed you just don't know where
-*/
-
 int		ft_printnegint(t_container *var, char *src, int len)
 {
 	char	*ptr;
@@ -84,15 +76,16 @@ int		ft_printnegint(t_container *var, char *src, int len)
 	return (0);
 }
 
-void	ft_join_print_int(t_container *var, char *str, int num)
+int		ft_join_print_int(t_container *var, char *str, int num)//switch to int
 {
+	int ret;
 	if (num < 0 && var->negflag == FALSE)
 		var->retval += ft_str_to_stdout("-");
 	var->retval += ft_str_to_stdout(str);
-	return ;
+	return (0);
 }
 
-int	ft_zero_valprec(t_container *var, char *str)
+int		ft_zero_valprec(t_container *var, char *str)
 {
 	char	*ptr;
 

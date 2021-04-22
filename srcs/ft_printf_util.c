@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:15:47 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/21 16:10:59 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/22 16:42:58 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int		ft_str_trunc(char *src, t_container *var)
 {
 	if (var->fprecision < var->fwidth)
 	{
-		ft_printstrwhitespace(var, src, var->fprecision);
+		if (ft_printstrwhitespace(var, src, var->fprecision) == -1)
+			return (-1);
 	}
 	else
 	{

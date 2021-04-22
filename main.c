@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 12:28:59 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/21 17:37:23 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/22 16:17:11 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,17 @@ int	main(void)
 	char	*t = "0x12345678";
 	char	*u = "-0";
 
-	a = 12;
-	b = 18;
-	ft_printf("%-2s, %.s, %-4s, %-2.4s, %-8.12s, %3s, %8s, %---2s, %.*s, %.0s, %.1s, %.2s, %.4s, %.8s", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -2, NULL, NULL, NULL, NULL, NULL, NULL);
-	   printf("%-2s, %.s, %-4s, %-2.4s, %-8.12s, %3s, %8s, %---2s, %.*s, %.0s, %.1s, %.2s, %.4s, %.8s", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -2, NULL, NULL, NULL, NULL, NULL, NULL);
+	a = 0x7fffffff;
+	b = 0;
+	a++;
+	printf("%*d\n", a, 12345);
+	//
+	//printf("\n%d\n", b);
 	return (0);
 }
 
 /*
-**if val is 0 and prec is 0 pdiuxX
-**(p still puts 0x prefix)
-**(don't need to do anything for c and s because 0 is null terminator)
+**
+**
+**
 */

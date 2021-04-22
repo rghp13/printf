@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:27:17 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/21 17:41:11 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/22 16:40:57 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	ft_print_str(t_container *var)
 		hold = ft_strdup("(null)");
 	else
 		hold = ft_strdup(hold);
+	if (hold == NULL)
+		return (-1);
 	len = ft_strlen(hold);
 	if (var->fzp && var->fprecision < len)
 		ft_str_trunc(hold, var);
@@ -52,7 +54,8 @@ int	ft_print_str(t_container *var)
 	{
 		if (var->fwidth > len)
 		{
-			ft_printstrwhitespace(var, hold, len);
+			if (ft_printstrwhitespace(var, hold, len) == -1)
+				return (-1);
 		}
 		else
 			var->retval += ft_str_to_stdout(hold);
@@ -98,6 +101,7 @@ int	ft_print_int(t_container *var)
 	int		num;
 	char	*str;
 	char	*hold;
+	int		ret;
 
 	num = va_arg(var->ap, int);
 	str = ft_abs_itoa(num);
@@ -110,13 +114,13 @@ int	ft_print_int(t_container *var)
 		str = hold;
 	}
 	if ((size_t)var->fwidth > ft_strlen(str) && (var->negflag || num >= 0))
-		ft_printstrwhitespace(var, str, strlen(str));
+		ret = ft_printstrwhitespace(var, str, strlen(str));
 	else if ((size_t)var->fwidth > ft_strlen(str))
-		ft_printnegint(var, str, strlen(str));
+		ret = ft_printnegint(var, str, strlen(str));
 	else
-		ft_join_print_int(var, str, num);
+		ret = ft_join_print_int(var, str, num);
 	free(str);
-	return (0);
+	return (ret);
 }
 
 /*

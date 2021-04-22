@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 02:32:40 by romain            #+#    #+#             */
-/*   Updated: 2021/04/21 14:43:45 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/22 16:25:24 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,13 @@ void	ft_read(t_container *var)
 			processed = ft_flag_check(var, ++i);
 			i += processed;
 			if (var->type)
-				ft_print_arg(var);
+			{
+				if (ft_print_arg(var) == -1)
+				{
+					var->retval = -1;
+					return ;
+				}
+			}
 			else
 				ft_print_nonformat(var, i);
 		}
@@ -50,23 +56,25 @@ void	ft_read(t_container *var)
 
 int		ft_print_arg(t_container *var)
 {
+	int ret;
+
 	if (var->type == 'c')
-		ft_print_char(var);
+		ret = ft_print_char(var);
 	else if (var->type == 's')
-		ft_print_str(var);
+		ret = ft_print_str(var);
 	else if (var->type == 'p')
-		ft_print_address(var);
+		ret = ft_print_address(var);
 	else if (var->type == 'd' || var->type == 'i')
-		ft_print_int(var);
+		ret = ft_print_int(var);
 	else if (var->type == 'u')
-		ft_print_uint(var);
+		ret = ft_print_uint(var);
 	else if (var->type == 'x' || var->type == 'X')
-		ft_print_hex(var);
+		ret = ft_print_hex(var);
 	else if (var->type == '%')
-		ft_print_percent(var);
+		ret = ft_print_percent(var);
 	else
 		return (-1);
-	return (0);
+	return (ret);
 }
 
 int		ft_print_nonformat(t_container *var, int i)

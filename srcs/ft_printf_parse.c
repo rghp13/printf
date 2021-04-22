@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:14:34 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/19 15:13:14 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/22 15:09:07 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int		ft_parse_type(t_container *var, int i, char *type)
 		i++;
 	if (var->format[i])
 		var->type = var->format[i];
+	else if (var->format[i] == '\0')
+		i--;
 	return (i - diff);
 }
 
@@ -66,20 +68,20 @@ int		ft_parse_precision(t_container *var, int i)
 
 int		ft_parse_flag(t_container *var, int i)
 {
-	char	hold;
 	int		diff;
 
 	diff = i;
 	while (TRUE)
 	{
-		hold = var->format[i];
-		if (hold == '-')
+		if (var->format[i] == ' ')
+			var->retval += ft_str_to_stdout(" ");
+		else if (var->format[i] == '-')
 			var->fleft = 1;
-		else if (hold == '0')
+		else if (var->format[i] == '0')
 			var->fzero = 1;
-		else if (hold == '*')
+		else if (var->format[i] == '*')
 			var->fwidth = va_arg(var->ap, int);
-		else if (hold > '0' && hold <= '9')
+		else if (var->format[i] > '0' && var->format[i] <= '9')
 		{
 			var->fwidth = ft_atoi(var->format + i);
 			while (ft_isdigit(var->format[i]))

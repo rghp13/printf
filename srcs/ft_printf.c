@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 02:32:40 by romain            #+#    #+#             */
-/*   Updated: 2021/04/22 22:36:41 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/23 16:48:00 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 ** 0 precision on string is no output no matter the value
 */
 
-void	ft_read(t_container *var)
+int	ft_read(t_container *var)
 {
 	int i;
 	int processed;
@@ -41,10 +41,7 @@ void	ft_read(t_container *var)
 			if (var->type)
 			{
 				if (ft_print_arg(var) == -1)
-				{
-					var->retval = -1;
-					return ;
-				}
+					return (-1);
 			}
 			else
 				ft_print_nonformat(var, i);
@@ -52,9 +49,10 @@ void	ft_read(t_container *var)
 		else
 			ft_print_nonformat(var, i);
 	}
+	return (0);
 }
 
-int		ft_print_arg(t_container *var)
+int	ft_print_arg(t_container *var)
 {
 	int ret;
 
@@ -77,14 +75,14 @@ int		ft_print_arg(t_container *var)
 	return (ret);
 }
 
-int		ft_print_nonformat(t_container *var, int i)
+int	ft_print_nonformat(t_container *var, int i)
 {
 	write(1, var->format + i, 1);
 	var->retval++;
 	return (0);
 }
 
-int		ft_printf(const char *format, ...)
+int	ft_printf(const char *format, ...)
 {
 	t_container var;
 
@@ -92,7 +90,11 @@ int		ft_printf(const char *format, ...)
 	var.retval = 0;
 	ft_struct_init(&var);
 	va_start(var.ap, format);
-	ft_read(&var);
+	if ((ft_read(&var)) == -1)
+	{
+		va_end(var.ap);
+		return (-1);
+	}
 	va_end(var.ap);
 	return (var.retval);
 }

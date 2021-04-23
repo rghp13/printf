@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 02:34:37 by romain            #+#    #+#             */
-/*   Updated: 2021/04/22 22:36:23 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/23 16:23:50 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,15 @@ typedef	struct		s_var
 {
 	int				len;
 	int				ret;
+	int				val;
 	char			*hold;
 	char			*str;
-	unsigned long	ulong;
-
+	unsigned		usval;
+	unsigned long	uval;
 }					t_var;
 
 int					ft_printf(const char *format, ...);
-void				ft_read(t_container *var);
+int					ft_read(t_container *var);
 int					ft_flag_check(t_container *var, int i);
 int					ft_print_arg(t_container *var);
 void				ft_struct_init(t_container *var);

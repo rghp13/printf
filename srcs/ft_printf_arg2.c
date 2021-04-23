@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:39:01 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/21 14:54:54 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/23 15:50:32 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,28 @@
 
 int		ft_print_uint(t_container *var)
 {
-	unsigned	num;
-	char		*str;
-	char		*hold;
+	t_var	puint;
 
-	num = va_arg(var->ap, unsigned int);
-	str = ft_utoa(num);
-	if (var->fzp && var->fprecision == 0 && num == 0)
-		return (ft_zero_valprec(var, str));
-	if (ft_strlen(str) < (size_t)var->fprecision)
+	puint.ret = 0;
+	puint.usval = va_arg(var->ap, unsigned int);
+	if ((puint.str = ft_utoa(puint.usval)) == NULL)
+		return (-1);
+	if (var->fzp && var->fprecision == 0 && puint.usval == 0)
+		return (ft_zero_valprec(var, puint.str));
+	if (ft_strlen(puint.str) < (size_t)var->fprecision)
 	{
-		hold = ft_prefprecision(var, str, 0);
-		free(str);
-		str = hold;
+		puint.hold = ft_prefprecision(var, puint.str, 0);
+		free(puint.str);
+		if (puint.hold == NULL)
+			return (-1);
+		puint.str = puint.hold;
 	}
-	if ((size_t)var->fwidth > ft_strlen(str))
-		ft_printstrwhitespace(var, str, ft_strlen(str));
+	if ((size_t)var->fwidth > ft_strlen(puint.str))
+		puint.ret = ft_printstrwhitespace(var, puint.str, ft_strlen(puint.str));
 	else
-		var->retval += ft_str_to_stdout(str);
-	free(str);
-	return (0);
+		var->retval += ft_str_to_stdout(puint.str);
+	free(puint.str);
+	return (puint.ret);
 }
 
 /*
@@ -51,15 +53,17 @@ int		ft_print_uint(t_container *var)
 int		ft_print_percent(t_container *var)
 {
 	char	*str;
+	int		ret;
 
+	ret = 0;
 	if (!(str = malloc(sizeof(char) * 2)))
 		return (-1);
 	str[0] = '%';
 	str[1] = '\0';
 	if ((size_t)var->fwidth > ft_strlen(str))
-		ft_printstrwhitespace(var, str, ft_strlen(str));
+		ret = ft_printstrwhitespace(var, str, ft_strlen(str));
 	else
 		var->retval += ft_str_to_stdout(str);
 	free(str);
-	return (0);
+	return (ret);
 }

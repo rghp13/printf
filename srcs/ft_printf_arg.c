@@ -6,7 +6,7 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:27:17 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/22 22:36:38 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/23 16:46:40 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_print_char(t_container *var)
 		ret = ft_pad_print(var->fwidth - 1);
 		if (ret == -1)
 			return (-1);
-		var->retval = ret;
+		var->retval += ret;
 	}
 	else
 	{
@@ -42,7 +42,7 @@ int	ft_print_char(t_container *var)
 **OTHERWISE IF WIDTH IS SMALLER THAN STRING YOU CAN GO OVER
 */
 
-int	ft_print_str(t_container *var)//GET THIS TO 25 LINES
+int	ft_print_str(t_container *var)
 {
 	char	*hold;
 	int		len;
@@ -59,7 +59,7 @@ int	ft_print_str(t_container *var)//GET THIS TO 25 LINES
 		ft_str_trunc(hold, var);
 	else
 	{
-		if(ft_str_setup_space(var, hold, len) == -1)
+		if (ft_str_setup_space(var, hold, len) == -1)
 		{
 			free(hold);
 			return (-1);
@@ -76,30 +76,28 @@ int	ft_print_str(t_container *var)//GET THIS TO 25 LINES
 
 int	ft_print_address(t_container *var)
 {
-	unsigned long int	address;
-	char				*hex;
-	char				*ptr;
+	t_var	padd;
 
-	address = va_arg(var->ap, unsigned long int);
-	if ((hex = ft_itoa_hex(address)) == NULL)
+	padd.uval = va_arg(var->ap, unsigned long int);
+	if ((padd.str = ft_itoa_hex(padd.uval)) == NULL)
 		return (-1);
-	ptr = ft_strjoin("0x", hex);
-	free(hex);
-	if (ptr == NULL)
+	padd.hold = ft_strjoin("0x", padd.str);
+	free(padd.str);
+	if (padd.hold == NULL)
 		return (-1);
-	if (var->fprecision == 0 && var->fzp && address == 0)
-		ptr[2] = '\0';
-	if ((size_t)var->fwidth > ft_strlen(ptr))
+	if (var->fprecision == 0 && var->fzp && padd.uval == 0)
+		padd.hold[2] = '\0';
+	if ((size_t)var->fwidth > ft_strlen(padd.hold))
 	{
-		if ((ft_printstrwhitespace(var, ptr, ft_strlen(ptr))) == -1)
+		if ((ft_printstrwhitespace(var, padd.hold, ft_strlen(padd.hold))) == -1)
 		{
-			free(ptr);
+			free(padd.hold);
 			return (-1);
 		}
 	}
 	else
-		var->retval += ft_str_to_stdout(ptr);
-	free(ptr);
+		var->retval += ft_str_to_stdout(padd.hold);
+	free(padd.hold);
 	return (0);
 }
 
@@ -112,32 +110,31 @@ int	ft_print_address(t_container *var)
 
 int	ft_print_int(t_container *var)
 {
-	int		num;
-	char	*str;
-	char	*hold;
-	int		ret;
+	t_var	pint;
 
-	str = ft_abs_itoa(num = va_arg(var->ap, int));
-	if (str == NULL)
+	pint.val = va_arg(var->ap, int);
+	pint.str = ft_abs_itoa(pint.val);
+	if (pint.str == NULL)
 		return (-1);
-	if (var->fzp && var->fprecision == 0 && num == 0)
-		return (ft_zero_valprec(var, str));
-	if (ft_strlen(str) < (size_t)var->fprecision)
+	if (var->fzp && var->fprecision == 0 && pint.val == 0)
+		return (ft_zero_valprec(var, pint.str));
+	if (ft_strlen(pint.str) < (size_t)var->fprecision)
 	{
-		if ((hold = ft_prefprecision(var, str, num)) == NULL)
-		free(str);
-		if (hold == NULL)
+		pint.hold = ft_prefprecision(var, pint.str, pint.val);
+		free(pint.str);
+		if (pint.hold == NULL)
 			return (-1);
-		str = hold;
+		pint.str = pint.hold;
 	}
-	if ((size_t)var->fwidth > ft_strlen(str) && (var->negflag || num >= 0))
-		ret = ft_printstrwhitespace(var, str, strlen(str));
-	else if ((size_t)var->fwidth > ft_strlen(str))
-		ret = ft_printnegint(var, str, strlen(str));
+	if ((size_t)var->fwidth > ft_strlen(pint.str)
+		&& (var->negflag || pint.val >= 0))
+		pint.ret = ft_printstrwhitespace(var, pint.str, strlen(pint.str));
+	else if ((size_t)var->fwidth > ft_strlen(pint.str))
+		pint.ret = ft_printnegint(var, pint.str, strlen(pint.str));
 	else
-		ret = ft_join_print_int(var, str, num);
-	free(str);
-	return (ret);
+		pint.ret = ft_join_print_int(var, pint.str, pint.val);
+	free(pint.str);
+	return (pint.ret);
 }
 
 /*
@@ -147,26 +144,29 @@ int	ft_print_int(t_container *var)
 
 int	ft_print_hex(t_container *var)
 {
-	unsigned	hexval;
-	char		*hex;
-	char		*hold;
+	t_var		phex;
 
-	hexval = va_arg(var->ap, unsigned int);
-	hex = ft_itoa_hex(hexval);
-	if (var->fzp && var->fprecision == 0 && hexval == 0)
-		return (ft_zero_valprec(var, hex));
+	phex.ret = 0;
+	phex.usval = va_arg(var->ap, unsigned int);
+	phex.str = ft_itoa_hex(phex.usval);
+	if (phex.str == NULL)
+		return (-1);
+	if (var->fzp && var->fprecision == 0 && phex.usval == 0)
+		return (ft_zero_valprec(var, phex.str));
 	if (var->type == 'X')
-		hex = ft_strupcase(hex);
-	if (ft_strlen(hex) < (size_t)var->fprecision)
+		phex.str = ft_strupcase(phex.str);
+	if (ft_strlen(phex.str) < (size_t)var->fprecision)
 	{
-		hold = ft_prefprecision(var, hex, 0);
-		free(hex);
-		hex = hold;
+		phex.hold = ft_prefprecision(var, phex.str, 0);
+		free(phex.str);
+		if (phex.hold == NULL)
+			return (-1);
+		phex.str = phex.hold;
 	}
-	if ((size_t)var->fwidth > ft_strlen(hex))
-		ft_printstrwhitespace(var, hex, strlen(hex));
+	if ((size_t)var->fwidth > ft_strlen(phex.str))
+		phex.ret = ft_printstrwhitespace(var, phex.str, strlen(phex.str));
 	else
-		var->retval += ft_str_to_stdout(hex);
-	free(hex);
-	return (0);
+		var->retval += ft_str_to_stdout(phex.str);
+	free(phex.str);
+	return (phex.ret);
 }

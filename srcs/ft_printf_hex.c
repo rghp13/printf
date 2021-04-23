@@ -6,11 +6,16 @@
 /*   By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 17:31:24 by rponsonn          #+#    #+#             */
-/*   Updated: 2021/04/22 21:08:06 by rponsonn         ###   ########.fr       */
+/*   Updated: 2021/04/23 16:10:35 by rponsonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+**no need to protect the final strjoin, as if it returned null then
+**we are returning null either way
+*/
 
 char	*ft_convert_address(unsigned long int address)
 {
@@ -18,6 +23,8 @@ char	*ft_convert_address(unsigned long int address)
 	char	*ptr;
 
 	hex = ft_itoa_hex(address);
+	if (hex == NULL)
+		return (NULL);
 	ptr = ft_strjoin("0x", hex);
 	free(hex);
 	return (ptr);
@@ -76,9 +83,8 @@ int		ft_printnegint(t_container *var, char *src, int len)
 	return (0);
 }
 
-int		ft_join_print_int(t_container *var, char *str, int num)//switch to int
+int		ft_join_print_int(t_container *var, char *str, int num)
 {
-	int ret;
 	if (num < 0 && var->negflag == FALSE)
 		var->retval += ft_str_to_stdout("-");
 	var->retval += ft_str_to_stdout(str);

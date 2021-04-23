@@ -6,7 +6,7 @@
 #    By: rponsonn <rponsonn@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/15 17:11:00 by rponsonn          #+#    #+#              #
-#    Updated: 2021/04/21 17:24:23 by rponsonn         ###   ########.fr        #
+#    Updated: 2021/04/23 17:44:08 by rponsonn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,8 @@ ${NAME}:			${OBJS}
 					@ar -rcs ${NAME} ${OBJS}
 all:				${NAME}
 
+bonus:				${NAME}
+
 test:				
 					@echo Compiling Testing program
 					make bonus -C ${DIR_LIB}
@@ -63,4 +65,4 @@ fclean:				clean
 					${RM} ${DIR_HEAD}*.gch
 					@make fclean -C ${DIR_LIB}
 re:					fclean ${NAME}
-.PHONY:				all clean fclean re
+.PHONY:				all clean fclean re test
